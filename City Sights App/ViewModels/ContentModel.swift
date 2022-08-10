@@ -42,12 +42,59 @@ class ContentModel: NSObject, CLLocationManagerDelegate, ObservableObject {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         // Gives us the location of the user
-        print(locations.first ?? "no location")
-        
-        // Stop requesting tthe location after we get it once
-        locationManager.stopUpdatingLocation()
-        
-        // TODO: if we have the coordinates of the user, send into Yelp API
+        let userLocation = locations.first
+       
+        if userLocation != nil {
+            
+            // We have a location
+            // Stop requesting tthe location after we get it once
+            locationManager.stopUpdatingLocation()
+            
+            // if we have the coordinates of the user, send into Yelp API
+            //getBusinessrd(category: "arts", location: userLocation!)
+            getBusinessrd(category: "restaurants", location: userLocation!)
+        }
     }
+    
+    // MARK: - Yelp API methods
+    
+    func getBusinessrd(category: String, location: CLLocation) {
         
+        // Create URL
+        /*
+        let urlString = "https://api.yelp.com/v3/businesses/search?latitude=\(location.coordinate.latitude)&longitide=\(location.coordinate.longitude)&categories=\(category)&limit=6"
+        let url = URL(string: urlString)
+         */
+        var urlComponents = URLComponents(string: "https://api.yelp.com/v3/businesses/search")
+        urlComponents?.queryItems = [
+            URLQueryItem(name: "latitude", value: String(location.coordinate.latitude)),
+            URLQueryItem(name: "longitude", value: String(location.coordinate.longitude)),
+            URLQueryItem(name: "categories", value: String(category)),
+            URLQueryItem(name: "limit", value: "6")
+        ]
+        let url = urlComponents?.url
+        
+        if let url = url {
+            
+            // Create URL Request
+            var request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10.0)
+            request.httpMethod = "GET"
+            request.addValue("Bearer GA5UeHnCMc9BIqNplYw2QHi4LfmBtkO4GTa_ga86kupSF8LQrOWQOCglnOufhWOIL-P2YZHnNvKSS3quiQeR8ZkrY3CpiFTjAU3ZonbmFR1q8R9V_7bKHiRIiE_zYnYx", forHTTPHeaderField: "Authorization")
+            
+            // Get URL Session
+            let session = URLSession.shared
+            
+            // Create Data Task
+            let dataTask = session.dataTask(with: request) { data, response, error in
+                
+                // Check that there isn't an error
+                if error == nil {
+                    print(response)
+                }
+            }
+            
+            // Start the Data Task
+            dataTask.resume()
+        }
+    }
 }
