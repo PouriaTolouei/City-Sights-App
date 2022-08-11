@@ -65,7 +65,7 @@ class ContentModel: NSObject, CLLocationManagerDelegate, ObservableObject {
         let urlString = "https://api.yelp.com/v3/businesses/search?latitude=\(location.coordinate.latitude)&longitide=\(location.coordinate.longitude)&categories=\(category)&limit=6"
         let url = URL(string: urlString)
          */
-        var urlComponents = URLComponents(string: "https://api.yelp.com/v3/businesses/search")
+        var urlComponents = URLComponents(string: Constants.apiUrl)
         urlComponents?.queryItems = [
             URLQueryItem(name: "latitude", value: String(location.coordinate.latitude)),
             URLQueryItem(name: "longitude", value: String(location.coordinate.longitude)),
@@ -79,7 +79,7 @@ class ContentModel: NSObject, CLLocationManagerDelegate, ObservableObject {
             // Create URL Request
             var request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10.0)
             request.httpMethod = "GET"
-            request.addValue("Bearer GA5UeHnCMc9BIqNplYw2QHi4LfmBtkO4GTa_ga86kupSF8LQrOWQOCglnOufhWOIL-P2YZHnNvKSS3quiQeR8ZkrY3CpiFTjAU3ZonbmFR1q8R9V_7bKHiRIiE_zYnYx", forHTTPHeaderField: "Authorization")
+            request.addValue("Bearer \(Constants.apiKey)", forHTTPHeaderField: "Authorization")
             
             // Get URL Session
             let session = URLSession.shared

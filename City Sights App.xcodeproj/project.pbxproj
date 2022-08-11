@@ -11,6 +11,7 @@
 		3AB263C128A299C00086846B /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB263C028A299C00086846B /* LaunchView.swift */; };
 		3AB263C328A299C20086846B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AB263C228A299C20086846B /* Assets.xcassets */; };
 		3AB263C628A299C20086846B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AB263C528A299C20086846B /* Preview Assets.xcassets */; };
+		3AB852F028A4DB5700065181 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB852EF28A4DB5700065181 /* Constants.swift */; };
 		3AD0CF3428A34F240016464E /* ContentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD0CF3328A34F240016464E /* ContentModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -20,6 +21,7 @@
 		3AB263C028A299C00086846B /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
 		3AB263C228A299C20086846B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3AB263C528A299C20086846B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		3AB852EF28A4DB5700065181 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		3AD0CF3328A34F240016464E /* ContentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -57,6 +59,7 @@
 				3AB263CE28A29AA70086846B /* Views */,
 				3AB263CD28A29A9C0086846B /* ViewModels */,
 				3AB263CC28A29A8F0086846B /* Models */,
+				3AB852EE28A4DB3200065181 /* Helpers */,
 				3AB263C228A299C20086846B /* Assets.xcassets */,
 				3AB263C428A299C20086846B /* Preview Content */,
 			);
@@ -92,6 +95,14 @@
 				3AB263C028A299C00086846B /* LaunchView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		3AB852EE28A4DB3200065181 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				3AB852EF28A4DB5700065181 /* Constants.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -167,6 +178,7 @@
 				3AB263C128A299C00086846B /* LaunchView.swift in Sources */,
 				3AB263BF28A299C00086846B /* CitySightsApp.swift in Sources */,
 				3AD0CF3428A34F240016464E /* ContentModel.swift in Sources */,
+				3AB852F028A4DB5700065181 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
