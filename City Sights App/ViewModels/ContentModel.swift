@@ -12,6 +12,9 @@ class ContentModel: NSObject, CLLocationManagerDelegate, ObservableObject {
     
     var locationManager = CLLocationManager()
     
+    @Published var restaurants = [Business]()
+    @Published var sights = [Business]()
+    
     override init() {
         
         // Init method of NSObject
@@ -51,8 +54,8 @@ class ContentModel: NSObject, CLLocationManagerDelegate, ObservableObject {
             locationManager.stopUpdatingLocation()
             
             // if we have the coordinates of the user, send into Yelp API
-            //getBusinessrd(category: "arts", location: userLocation!)
-            getBusinessrd(category: "restaurants", location: userLocation!)
+            getBusinessrd(category: Constants.sightsKey, location: userLocation!)
+            getBusinessrd(category: Constants.restaurantsKey, location: userLocation!)
         }
     }
     
@@ -89,7 +92,29 @@ class ContentModel: NSObject, CLLocationManagerDelegate, ObservableObject {
                 
                 // Check that there isn't an error
                 if error == nil {
-                    print(response)
+                    
+                    do {
+                        // Parse json
+                        let decoder = JSONDecoder()
+                        let result = try decoder.decode(BusinessSearch.self, from: data!)
+                        
+                        DispatchQueue.main.async {
+                            
+                            // Assign results to the appropriate property
+                            switch category {
+                            case Constants.sightsKey:
+                                self.sights = result.businesses
+                            case Constants.restaurantsKey:
+                                self.restaurants = result.businesses
+                            default:
+                                break
+                            }
+                            
+                        }
+                    }
+                    catch {
+                        print(error)
+                    }   
                 }
             }
             
