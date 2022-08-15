@@ -61,7 +61,6 @@
 				3A22111B28A613C700234310 /* BusinessSectionHeader.swift */,
 				3A22111E28A61A2800234310 /* BusinessSection.swift */,
 				3A22112028A62F1600234310 /* BusinessRow.swift */,
-				3A8F2BF528A7702400FA1172 /* Detail */,
 			);
 			path = List;
 			sourceTree = "<group>";
@@ -86,6 +85,7 @@
 				3A22808D28A604A800A95E7B /* HomeView.swift */,
 				3A22111828A60D2A00234310 /* List */,
 				3A8F2BF828A79EB900FA1172 /* Map */,
+				3A8F2BF528A7702400FA1172 /* Detail */,
 			);
 			path = Home;
 			sourceTree = "<group>";
