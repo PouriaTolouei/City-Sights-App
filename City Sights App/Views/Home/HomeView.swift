@@ -29,7 +29,7 @@ struct HomeView: View {
                             
                             Image(systemName: "location")
                             
-                            Text("San Francisco")
+                            Text(model.placemark?.locality ?? "")
                             
                             Spacer()
                             
@@ -40,7 +40,19 @@ struct HomeView: View {
                         
                         Divider()
                         
-                        BusinessList()
+                        ZStack(alignment: .top) {
+                            
+                            BusinessList()
+                            
+                            HStack {
+                                
+                                Spacer()
+                                
+                                YelpAttribution(link: "https://www.yelp.com")
+                            }
+                            .padding(.trailing, -20)
+                            
+                        }
                     }
                     .padding([.horizontal, .top])
                     .navigationBarHidden(true)
@@ -70,7 +82,7 @@ struct HomeView: View {
                                 
                                 Image(systemName: "location")
                                 
-                                Text("San Francisco")
+                                Text(model.placemark?.locality ?? "")
                                 
                                 Spacer()
                                 

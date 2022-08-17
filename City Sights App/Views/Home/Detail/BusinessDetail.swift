@@ -9,6 +9,7 @@ import SwiftUI
 
 struct BusinessDetail: View {
     
+    @EnvironmentObject var model: ContentModel
     var business: Business
     @State private var showDirections = false
     
@@ -34,7 +35,7 @@ struct BusinessDetail: View {
                 ZStack(alignment: .leading) {
                     
                     Rectangle()
-                        .foregroundColor((business.isClosed ?? true) ? .gray : .blue)
+                        .foregroundColor((business.isClosed ?? true) ? .gray : model.blue)
                         .frame(height: 36)
                     
                     Text((business.isClosed ?? false) ? "Closed" : "Open")
@@ -47,10 +48,19 @@ struct BusinessDetail: View {
             // Business Details
             Group {
                 
-                BusinessTitle(business: business)
-                    .padding()
+                HStack {
+                    
+                    BusinessTitle(business: business)
+                        .padding(.top)
+                    
+                    Spacer()
+                    
+                    YelpAttribution(link: business.url ?? "")
+                        .padding(.trailing, -20)
+                }
                 
-                Divider()
+                DashedDivider()
+                    .padding(.vertical)
                 
                 // Phone
                 HStack {
@@ -64,9 +74,9 @@ struct BusinessDetail: View {
                     
                     Link("Call", destination: URL(string: "tel:\(business.phone ?? "")") ?? URL(fileURLWithPath: ""))
                 }
-                .padding()
                 
-                Divider()
+                DashedDivider()
+                    .padding(.vertical)
                 
                 // Reviews
                 HStack {
@@ -80,9 +90,9 @@ struct BusinessDetail: View {
                     
                     Link("Read", destination: URL(string: business.url ?? "") ?? URL(fileURLWithPath: ""))
                 }
-                .padding()
                 
-                Divider()
+                DashedDivider()
+                    .padding(.vertical)
                 
                 // Website
                 HStack {
@@ -97,10 +107,11 @@ struct BusinessDetail: View {
                     
                     Link("Visit", destination: URL(string: business.url ?? "") ?? URL(fileURLWithPath: ""))
                 }
-                .padding()
                 
-                Divider()
+                DashedDivider()
+                    .padding(.top)
             }
+            .padding(.horizontal)
             
             // Get directions button
             Button {

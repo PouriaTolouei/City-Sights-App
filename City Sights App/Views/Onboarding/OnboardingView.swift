@@ -13,8 +13,6 @@ struct OnboardingView: View {
     
     @State private var tabSelection = 0
     
-    private let blue = Color(red: 0/255, green: 130/255, blue: 167/255)
-    private let turquiose = Color(red: 55/255, green: 197/255, blue: 192/255)
     
     var body: some View {
         
@@ -88,14 +86,14 @@ struct OnboardingView: View {
                         .padding()
                 }
             }
-            .tint(tabSelection == 0 ? blue : turquiose)
+            .tint(tabSelection == 0 ? model.blue : model.turquiose)
             .padding()
             
             Spacer()
 
         }
         .padding()
-        .background(tabSelection == 0 ? blue : turquiose)
+        .background(tabSelection == 0 ? model.blue : model.turquiose)
         .ignoresSafeArea()
         
         

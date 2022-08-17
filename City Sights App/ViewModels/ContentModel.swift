@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreLocation
+import SwiftUI
 
 class ContentModel: NSObject, CLLocationManagerDelegate, ObservableObject {
     
@@ -16,6 +17,11 @@ class ContentModel: NSObject, CLLocationManagerDelegate, ObservableObject {
     
     @Published var restaurants = [Business]()
     @Published var sights = [Business]()
+    
+    @Published var placemark: CLPlacemark?
+    
+    let blue = Color(red: 0/255, green: 130/255, blue: 167/255)
+    let turquiose = Color(red: 55/255, green: 197/255, blue: 192/255)
     
     override init() {
         
@@ -62,9 +68,24 @@ class ContentModel: NSObject, CLLocationManagerDelegate, ObservableObject {
             // Stop requesting tthe location after we get it once
             locationManager.stopUpdatingLocation()
             
+            // Get the placemark of the user
+            let geoCoder = CLGeocoder()
+            
+            geoCoder.reverseGeocodeLocation(userLocation!) { placemarks, error in
+                
+                // Check that there aren't errors
+                if error == nil && placemarks != nil {
+                    
+                    // Take the first placemark
+                    self.placemark = placemarks?.first
+                    
+                }
+                
+            }
+            
             // if we have the coordinates of the user, send into Yelp API
-            getBusinessrd(category: Constants.sightsKey, location: userLocation!)
             getBusinessrd(category: Constants.restaurantsKey, location: userLocation!)
+            getBusinessrd(category: Constants.sightsKey, location: userLocation!)
         }
     }
     
